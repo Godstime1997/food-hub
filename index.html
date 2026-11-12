@@ -21,8 +21,8 @@ header{background:#fff;padding:10px;position:sticky;top:0;z-index:20}
 .brand.active{border:2px solid #fb7701;background:#fff2e6}
 .banner{background:#000;color:#fff;margin:0 10px 10px;border-radius:14px;padding:14px}
 .products{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 10px 10px}
-.card{background:#fff;border-radius:12px;overflow:hidden;cursor:pointer;text-align:center}
-.emoji{font-size:70px;padding:15px 0 5px}
+.card{background:#fff;border-radius:12px;overflow:hidden;cursor:pointer}
+.card img{width:100%;height:160px;object-fit:cover;display:block}
 .card-body{padding:9px}.card h3{font-size:13px;margin:0;min-height:32px}
 .brand-tag{background:#000;color:#fff;font-size:10px;padding:3px 7px;border-radius:10px;font-weight:bold}
 .price{color:#e60000;font-weight:900}
@@ -32,6 +32,7 @@ header{background:#fff;padding:10px;position:sticky;top:0;z-index:20}
 .cart-bar button.pay{background:#00c853}
 .modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.8);overflow-y:auto;z-index:50}
 .box{background:#fff;margin:10px;border-radius:18px;padding:14px}
+.detail-img{width:100%;height:260px;object-fit:cover;border-radius:14px;display:block}
 .close-btn{background:#000;color:#fff;border:none;padding:9px 16px;border-radius:20px;float:right}
 .sz{padding:11px 18px;border:2px solid #ddd;border-radius:25px;font-weight:bold;background:#fff}
 .sz.sel{background:#000;color:#fff}
@@ -47,7 +48,7 @@ input,select{width:100%;padding:13px;margin:6px 0;border:1px solid #ddd;border-r
 </head>
 <body>
 <header><div style="display:flex;justify-content:space-between"><div class="logo">FOOD<span>HUB</span> 🍔</div><div>🛒 <b id="headCount">0</b></div></div><div style="font-size:12px;color:#666">📍 Port Harcourt • Fast Delivery 30-45 mins • Open Now</div><div class="search"><input id="search" placeholder="Search ANY Food: Jollof, Shawarma, Pizza..." onkeyup="searchP()"><button onclick="searchP()">Search</button></div></header>
-<div class="spin-banner"><h2 style="margin:0">🎡 SPIN & WIN FREE FOOD!</h2><p style="margin:4px 0;font-size:13px;color:#ccc">Spin, Win Discount, Use am to Order!</p><h1 id="spinResult" style="font-size:32px;margin:8px 0">🎡</h1><button onclick="spin()">🎡 SPIN NOW</button><div class="code-box" id="winCodeBox">🎉 YOU WIN <span id="winLabel"></span> | Code: <span id="winCode"></span></div></div>
+<div class="spin-banner"><h2 style="margin:0">🎡 SPIN & WIN FREE FOOD!</h2><p style="margin:4px 0;font-size:13px;color:#ccc">Spin, Win Discount, Use am to Order!</p><h1 id="spinResult" style="font-size:28px;margin:8px 0">🎡 SPIN NOW</h1><button onclick="spin()">🎡 SPIN NOW</button><div class="code-box" id="winCodeBox">🎉 YOU WIN <span id="winLabel"></span> | Code: <span id="winCode"></span></div></div>
 <div class="sec">🔥 HOT SELLERS - PEOPLE DEY ORDER NOW</div>
 <div class="products" id="marketGrid"></div>
 <div class="sec">🍽️ ORDER BY CATEGORY - ALL FOODS</div>
@@ -56,13 +57,31 @@ input,select{width:100%;padding:13px;margin:6px 0;border:1px solid #ddd;border-r
 <div class="cat"><button onclick="filterCat('all',this)" class="active">All</button><button onclick="filterCat('rice',this)">Rice</button><button onclick="filterCat('swallow',this)">Swallow</button><button onclick="filterCat('fastfood',this)">Fast Food</button><button onclick="filterCat('grill',this)">Grill / BBQ</button><button onclick="filterCat('drinks',this)">Drinks</button><button onclick="filterCat('snacks',this)">Snacks</button><button onclick="filterCat('breakfast',this)">Breakfast</button><button onclick="filterCat('soups',this)">Soups</button><button onclick="filterCat('dessert',this)">Dessert</button></div>
 <div class="products" id="products"></div>
 <div class="cart-bar"><div>🛒 <b id="count">0</b><br><b>Total: ₦<span id="total">0</span></b></div><div><button onclick="openCart()">View Cart</button> <button class="pay" onclick="openCart()">Checkout</button></div></div>
-<div class="modal" id="detailModal"><div class="box"><button class="close-btn" onclick="closeDetail()">X Close</button><div id="dEmoji" style="font-size:100px;text-align:center"></div><div id="dBrand" style="margin-top:8px"></div><h2 id="dName"></h2><div><span style="color:#e60000;font-size:22px;font-weight:900">₦<span id="dPrice"></span></span> <del id="dOld"></del> <span>⭐ 4.8 • 30-45 mins</span></div><p id="dDesc" style="color:#666;font-size:13px"></p><div><b>Size: <span id="dSizeName"></span></b></div><div style="display:flex;gap:8px;margin-top:8px" id="dSizes"></div><button class="add-big" style="margin-top:15px" onclick="addFromDetail()">🛒 ADD TO CART</button><button class="buy-big" onclick="buyNow()">⚡ ORDER NOW - DELIVERY</button></div></div>
+<div class="modal" id="detailModal"><div class="box"><button class="close-btn" onclick="closeDetail()">X Close</button><img id="dImg" class="detail-img" src=""><div id="dBrand" style="margin-top:8px"></div><h2 id="dName"></h2><div><span style="color:#e60000;font-size:22px;font-weight:900">₦<span id="dPrice"></span></span> <del id="dOld"></del> <span>⭐ 4.8 • 30-45 mins</span></div><p id="dDesc" style="color:#666;font-size:13px"></p><div><b>Size: <span id="dSizeName"></span></b></div><div style="display:flex;gap:8px;margin-top:8px" id="dSizes"></div><button class="add-big" style="margin-top:15px" onclick="addFromDetail()">🛒 ADD TO CART</button><button class="buy-big" onclick="buyNow()">⚡ ORDER NOW - DELIVERY</button></div></div>
 <div class="modal" id="cartModal"><div class="box"><button class="close-btn" onclick="closeCart()">X Close</button><h2>🛒 Your Food Order</h2><div id="cartList"></div><p>Discount Code: <input id="discountCode" placeholder="Enter Spin Code e.g FH20-1234"></p><p>Subtotal: ₦<b id="subTotal">0</b></p><p>Delivery Fee: ₦<b id="deliveryFee">1,000</b></p><div class="grand">TOTAL: ₦<span id="grandTotal">0</span></div><br><input id="cName" placeholder="Full Name *"><input id="cPhone" placeholder="Phone *"><input id="cEmail" placeholder="Email *"><input id="cAddress" placeholder="Delivery Address *"><select id="cLocation" onchange="renderCart()"><option value="PH">Port Harcourt - ₦1,000</option><option value="Lagos">Lagos - ₦2,000</option><option value="Abuja">Abuja - ₦2,000</option><option value="Other">Other - ₦3,000</option></select><select id="cTime"><option>Deliver Now (30-45 mins)</option><option>Deliver in 1 Hour</option><option>Deliver in 2 Hours</option><option>Schedule for Tomorrow</option></select><button class="pay-btn" onclick="payWithPaystack()">💳 PAY ₦<span id="payBtnTotal">0</span> NOW</button><button class="wa-btn" onclick="checkoutWhatsApp()">💬 WhatsApp Order</button></div></div>
 <script>
 var KEY="pk_live_522e90bc4d7ec45abe67ed9b807d7512a0d8ce5b";
 var P=[];
-function getEmoji(name){
-if(name.includes("Jollof"))return "🍚";if(name.includes("Rice"))return "🍚";if(name.includes("Shawarma"))return "🌯";if(name.includes("Burger"))return "🍔";if(name.includes("Pizza"))return "🍕";if(name.includes("Chicken"))return "🍗";if(name.includes("Fish"))return "🐟";if(name.includes("Soup"))return "🍲";if(name.includes("Amala")||name.includes("Eba")||name.includes("Fufu")||name.includes("Pounded")||name.includes("Semo")||name.includes("Wheat"))return "🍲";if(name.includes("Coke")||name.includes("Pepsi")||name.includes("Malt")||name.includes("Drink")||name.includes("Juice")||name.includes("Water")||name.includes("Tea")||name.includes("Zobo")||name.includes("Chapman")||name.includes("Smoothie"))return "🥤";if(name.includes("Pie")||name.includes("Doughnut")||name.includes("Puff")||name.includes("Roll")||name.includes("Buns")||name.includes("Chops"))return "🥐";if(name.includes("Akara")||name.includes("Bread")||name.includes("Yam")||name.includes("Plantain")||name.includes("Pancakes")||name.includes("Beans")||name.includes("Oat"))return "🍳";if(name.includes("Ice")||name.includes("Cake")||name.includes("Pudding")||name.includes("Fruit")||name.includes("Parfait"))return "🍰";if(name.includes("Suya")||name.includes("Grilled")||name.includes("Asun")||name.includes("Peppered")||name.includes("BBQ")||name.includes("Turkey")||name.includes("Gizzard"))return "🔥";if(name.includes("Sandwich")||name.includes("Hot Dog")||name.includes("Fried"))return "🍔";return "🍽️";
+function getImg(cat,name){
+if(name.indexOf("Jollof")>-1)return "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&auto=format&fit=crop&q=80";
+if(name.indexOf("Shawarma")>-1)return "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=600&auto=format&fit=crop&q=80";
+if(name.indexOf("Burger")>-1)return "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80";
+if(name.indexOf("Pizza")>-1)return "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&auto=format&fit=crop&q=80";
+if(name.indexOf("Chicken")>-1)return "https://images.unsplash.com/photo-1562967914-608f82629710?w=600&auto=format&fit=crop&q=80";
+if(name.indexOf("Fish")>-1||name.indexOf("Catfish")>-1)return "https://images.unsplash.com/photo-1535399831218-d5bd36d1a6b3?w=600&auto=format&fit=crop&q=80";
+if(name.indexOf("Coke")>-1||name.indexOf("Pepsi")>-1||name.indexOf("Malt")>-1||name.indexOf("Drink")>-1||name.indexOf("Juice")>-1||name.indexOf("Smoothie")>-1||name.indexOf("Chapman")>-1||name.indexOf("Zobo")>-1)return "https://images.unsplash.com/photo-1554866585-cd94860890b7?w=600&auto=format&fit=crop&q=80";
+if(name.indexOf("Ice Cream")>-1||name.indexOf("Cake")>-1||name.indexOf("Pudding")>-1||name.indexOf("Parfait")>-1)return "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=600&auto=format&fit=crop&q=80";
+if(name.indexOf("Soup")>-1)return "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&auto=format&fit=crop&q=80";
+if(cat=="rice")return "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&auto=format&fit=crop&q=80";
+if(cat=="swallow")return "https://images.unsplash.com/photo-1540189549336-e6e99c4299bd?w=600&auto=format&fit=crop&q=80";
+if(cat=="fastfood")return "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80";
+if(cat=="grill")return "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&auto=format&fit=crop&q=80";
+if(cat=="drinks")return "https://images.unsplash.com/photo-1554866585-cd94860890b7?w=600&auto=format&fit=crop&q=80";
+if(cat=="snacks")return "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&auto=format&fit=crop&q=80";
+if(cat=="breakfast")return "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=600&auto=format&fit=crop&q=80";
+if(cat=="soups")return "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&auto=format&fit=crop&q=80";
+if(cat=="dessert")return "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=600&auto=format&fit=crop&q=80";
+return "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&auto=format&fit=crop&q=80";
 }
 var FOOD_DATA=[
 ["rice",3500,["Jollof Rice + Chicken","Fried Rice + Chicken","White Rice + Stew","Banga Rice","Coconut Rice","Ofada Rice + Sauce","Chinese Fried Rice","Ghana Jollof Rice"]],
@@ -75,26 +94,26 @@ var FOOD_DATA=[
 ["soups",4000,["Egusi Soup + Meat","Ogbono Soup","Vegetable Soup","Oha Soup","Bitterleaf Soup","Okra Soup","Pepper Soup - Goat Meat","Pepper Soup - Catfish"]],
 ["dessert",2500,["Ice Cream","Cake Slice","Pudding","Fruit Salad","Parfait","Chocolate Cake"]],
 ];
-FOOD_DATA.forEach(function(b){b[2].forEach(function(name){P.push({cat:b[0],name:name,price:b[1],emoji:getEmoji(name)});});});
+FOOD_DATA.forEach(function(b){b[2].forEach(function(name){P.push({cat:b[0],name:name,price:b[1],img:getImg(b[0],name)});});});
 var cart=[],curBrand="all",curCat="all",searchQ="";
 var MARKET=[
-{cat:"rice",name:"Jollof Rice + Chicken",price:3500,emoji:"🍚"},
-{cat:"fastfood",name:"Shawarma + Drink",price:5000,emoji:"🌯"},
-{cat:"grill",name:"Grilled Catfish",price:6000,emoji:"🐟"},
-{cat:"fastfood",name:"Burger + Fries",price:5000,emoji:"🍔"},
-{cat:"swallow",name:"Amala + Ewedu",price:4000,emoji:"🍲"},
-{cat:"fastfood",name:"Pizza - Chicken",price:5000,emoji:"🍕"}
+{cat:"rice",name:"Jollof Rice + Chicken",price:3500,img:getImg("rice","Jollof Rice + Chicken")},
+{cat:"fastfood",name:"Shawarma + Drink",price:5000,img:getImg("fastfood","Shawarma + Drink")},
+{cat:"grill",name:"Grilled Catfish",price:6000,img:getImg("grill","Grilled Catfish")},
+{cat:"fastfood",name:"Burger + Fries",price:5000,img:getImg("fastfood","Burger + Fries")},
+{cat:"swallow",name:"Amala + Ewedu",price:4000,img:getImg("swallow","Amala + Ewedu")},
+{cat:"fastfood",name:"Pizza - Chicken",price:5000,img:getImg("fastfood","Pizza - Chicken")}
 ];
-var mg="";MARKET.forEach(function(m,i){mg+='<div class="card"><div class="emoji">'+m.emoji+'</div><div class="card-body"><span class="brand-tag">'+m.cat.toUpperCase()+'</span><h3>'+m.name+'</h3><div class="price">₦'+m.price.toLocaleString()+' <del>₦'+(m.price+1000).toLocaleString()+'</del></div><button class="add" onclick="buyMarket('+i+')">🛒 ORDER NOW</button></div></div>';});
+var mg="";MARKET.forEach(function(m,i){mg+='<div class="card"><img src="'+m.img+'" loading="lazy"><div class="card-body"><span class="brand-tag">'+m.cat.toUpperCase()+'</span><h3>'+m.name+'</h3><div class="price">₦'+m.price.toLocaleString()+' <del>₦'+(m.price+1000).toLocaleString()+'</del></div><button class="add" onclick="buyMarket('+i+')">🛒 ORDER NOW</button></div></div>';});
 document.getElementById('marketGrid').innerHTML=mg;
 function buyMarket(i){var m=MARKET[i];var msg="Hello Food Hub! I want to order: "+m.name+" - ₦"+m.price.toLocaleString()+" | My Address: ";window.open("https://wa.me/2349037002209?text="+encodeURIComponent(msg));}
 function renderBrands(){var cats={};P.forEach(function(p){cats[p.cat]=(cats[p.cat]||0)+1});var h='<div class="brand '+(curBrand=="all"?"active":"")+'" onclick="setBrand(\'all\')"><b>ALL</b><br><small>'+P.length+' foods</small></div>';Object.keys(cats).forEach(function(b){var em=b=="rice"?"🍚":b=="swallow"?"🍲":b=="fastfood"?"🍔":b=="grill"?"🔥":b=="drinks"?"🥤":b=="snacks"?"🥐":b=="breakfast"?"🍳":b=="soups"?"🍜":"🍰";h+='<div class="brand '+(curBrand==b?"active":"")+'" onclick="setBrand(\''+b+'\')"><b>'+em+' '+b.toUpperCase()+'</b><br><small>'+cats[b]+' foods</small></div>';});document.getElementById('brandBar').innerHTML=h;}
 function setBrand(b){curBrand=b;renderBrands();renderProducts();}
 function filterCat(c,el){curCat=c;document.querySelectorAll('.cat button').forEach(function(x){x.classList.remove('active')});el.classList.add('active');renderProducts();}
 function searchP(){searchQ=document.getElementById('search').value.toLowerCase();renderProducts();}
-function renderProducts(){var list=P.filter(function(p){if(curBrand!="all"&&p.cat!=curBrand)return false;if(curCat!="all"&&p.cat!=curCat)return false;if(searchQ&&p.name.toLowerCase().indexOf(searchQ)==-1)return false;return true;});document.getElementById('totalP').innerText=list.length+" Foods - "+(curBrand=="all"?"All Foods":curBrand.toUpperCase());var h="";list.forEach(function(p){h+='<div class="card" onclick="openDetail(\''+p.cat+'\',\''+p.name.replace(/'/g,"")+'\')"><div class="emoji">'+p.emoji+'</div><div class="card-body"><span class="brand-tag">'+p.cat.toUpperCase()+'</span><h3>'+p.name+'</h3><div class="price">₦'+p.price.toLocaleString()+' <del>₦'+(p.price+1000).toLocaleString()+'</del></div><div style="font-size:11px;color:#00a651">⭐ 4.8 • 30-45 mins • 🚚 Delivery</div><button class="add" onclick="event.stopPropagation();quickAdd(\''+p.cat+'\',\''+p.name.replace(/'/g,"")+'\','+p.price+')">+ ADD TO CART</button></div></div>';});document.getElementById('products').innerHTML=h||"<p style='padding:10px'>No food found</p>";}
+function renderProducts(){var list=P.filter(function(p){if(curBrand!="all"&&p.cat!=curBrand)return false;if(curCat!="all"&&p.cat!=curCat)return false;if(searchQ&&p.name.toLowerCase().indexOf(searchQ)==-1)return false;return true;});document.getElementById('totalP').innerText=list.length+" Foods - "+(curBrand=="all"?"All Foods":curBrand.toUpperCase());var h="";list.forEach(function(p){h+='<div class="card" onclick="openDetail(\''+p.cat+'\',\''+p.name.replace(/'/g,"")+'\')"><img src="'+p.img+'" loading="lazy"><div class="card-body"><span class="brand-tag">'+p.cat.toUpperCase()+'</span><h3>'+p.name+'</h3><div class="price">₦'+p.price.toLocaleString()+' <del>₦'+(p.price+1000).toLocaleString()+'</del></div><div style="font-size:11px;color:#00a651">⭐ 4.8 • 30-45 mins • 🚚 Delivery</div><button class="add" onclick="event.stopPropagation();quickAdd(\''+p.cat+'\',\''+p.name.replace(/'/g,"")+'\','+p.price+')">+ ADD TO CART</button></div></div>';});document.getElementById('products').innerHTML=h||"<p style='padding:10px'>No food found</p>";}
 var detail=null,selSize="Regular";
-function openDetail(cat,name){var p=null;for(var i=0;i<P.length;i++){if(P[i].cat==cat&&P[i].name==name){p=P[i];break;}}if(!p)return;detail=p;selSize="Regular";document.getElementById('dEmoji').innerText=p.emoji;document.getElementById('dBrand').innerHTML='<span class="brand-tag">'+p.cat.toUpperCase()+'</span>';document.getElementById('dName').innerText=p.name;document.getElementById('dPrice').innerText=p.price.toLocaleString();document.getElementById('dOld').innerText="₦"+(p.price+1000).toLocaleString();document.getElementById('dDesc').innerText=p.name+" - Freshly made, hot & delicious. Fast delivery in Port Harcourt, Lagos, Abuja. 30-45 mins delivery.";document.getElementById('dSizeName').innerText=selSize;var sizes=["Regular","Large +₦1,000","Family +₦2,500"];var sh="";sizes.forEach(function(s){sh+='<div class="sz '+(selSize==s?"sel":"")+'" onclick="pickSize(this,\''+s+'\')">'+s+'</div>';});document.getElementById('dSizes').innerHTML=sh;document.getElementById('detailModal').style.display='block';}
+function openDetail(cat,name){var p=null;for(var i=0;i<P.length;i++){if(P[i].cat==cat&&P[i].name==name){p=P[i];break;}}if(!p)return;detail=p;selSize="Regular";document.getElementById('dImg').src=p.img;document.getElementById('dBrand').innerHTML='<span class="brand-tag">'+p.cat.toUpperCase()+'</span>';document.getElementById('dName').innerText=p.name;document.getElementById('dPrice').innerText=p.price.toLocaleString();document.getElementById('dOld').innerText="₦"+(p.price+1000).toLocaleString();document.getElementById('dDesc').innerText=p.name+" - Freshly made, hot & delicious. Fast delivery in Port Harcourt, Lagos, Abuja. 30-45 mins delivery.";document.getElementById('dSizeName').innerText=selSize;var sizes=["Regular","Large +₦1,000","Family +₦2,500"];var sh="";sizes.forEach(function(s){sh+='<div class="sz '+(selSize==s?"sel":"")+'" onclick="pickSize(this,\''+s+'\')">'+s+'</div>';});document.getElementById('dSizes').innerHTML=sh;document.getElementById('detailModal').style.display='block';}
 function pickSize(el,s){selSize=s;document.getElementById('dSizeName').innerText=s;document.querySelectorAll('#dSizes .sz').forEach(function(x){x.classList.remove('sel')});el.classList.add('sel');}
 function closeDetail(){document.getElementById('detailModal').style.display='none';}
 function getPrice(){var pr=detail.price;if(selSize.indexOf("Large")>-1)pr+=1000;if(selSize.indexOf("Family")>-1)pr+=2500;return pr;}
