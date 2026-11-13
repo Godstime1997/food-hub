@@ -48,7 +48,7 @@ input,select{width:100%;padding:13px;margin:6px 0;border:1px solid #ddd;border-r
 </head>
 <body>
 <header><div style="display:flex;justify-content:space-between"><div class="logo">FOOD<span>HUB</span> 🍔</div><div>🛒 <b id="headCount">0</b></div></div><div style="font-size:12px;color:#666">📍 Port Harcourt • Fast Delivery 30-45 mins • Open Now</div><div class="search"><input id="search" placeholder="Search ANY Food: Jollof, Egusi, Suya..." onkeyup="searchP()"><button onclick="searchP()">Search</button></div></header>
-<div class="spin-banner"><h2 style="margin:0">🎡 SPIN & WIN FREE FOOD!</h2><p style="margin:4px 0;font-size:13px;color:#ccc">Spin, Win Discount, Use am to Order!</p><h1 id="spinResult" style="font-size:28px;margin:8px 0">🎡 SPIN NOW</h1><button onclick="spin()">🎡 SPIN NOW</button><div class="code-box" id="winCodeBox">🎉 YOU WIN <span id="winLabel"></span> | Code: <span id="winCode"></span></div></div>
+<div class="spin-banner"><h2 style="margin:0">🎡 SPIN & WIN FREE FOOD!</h2><p style="margin:4px 0;font-size:13px;color:#ccc">1 Spin Only! Win 1 of these foods FREE!</p><div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0"><span style="background:#fff;color:#000;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:bold">🍚 Jollof Rice</span><span style="background:#fff;color:#000;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:bold">🔥 Suya</span><span style="background:#fff;color:#000;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:bold">🍲 Egusi + Assorted</span><span style="background:#fff;color:#000;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:bold">🥘 Amala + Chicken</span><span style="background:#fff;color:#000;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:bold">🍖 Asun</span><span style="background:#fff;color:#000;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:bold">🍜 Goat Peppersoup</span></div><h1 id="spinResult" style="font-size:24px;margin:8px 0">🎡 SPIN NOW</h1><button id="spinBtn" onclick="spin()">🎡 SPIN NOW - 1 TIME ONLY</button><div class="code-box" id="winCodeBox">🎉 YOU WIN <span id="winLabel"></span> | Code: <span id="winCode"></span></div><p id="spinNote" style="font-size:11px;color:#aaa;margin:6px 0 0">You get only 1 spin. Use your winning code to order.</p></div>
 <div class="sec">🔥 HOT SELLERS - PEOPLE DEY ORDER NOW</div>
 <div class="products" id="marketGrid"></div>
 <div class="sec">🍽️ ORDER BY CATEGORY - ALL FOODS</div>
@@ -58,7 +58,7 @@ input,select{width:100%;padding:13px;margin:6px 0;border:1px solid #ddd;border-r
 <div class="products" id="products"></div>
 <div class="cart-bar"><div>🛒 <b id="count">0</b><br><b>Total: ₦<span id="total">0</span></b></div><div><button onclick="openCart()">View Cart</button> <button class="pay" onclick="openCart()">Checkout</button></div></div>
 <div class="modal" id="detailModal"><div class="box"><button class="close-btn" onclick="closeDetail()">X Close</button><img id="dImg" class="detail-img" src=""><div id="dBrand" style="margin-top:8px"></div><h2 id="dName"></h2><div><span style="color:#e60000;font-size:22px;font-weight:900">₦<span id="dPrice"></span></span> <del id="dOld"></del> <span>⭐ 4.8 • 30-45 mins</span></div><p id="dDesc" style="color:#666;font-size:13px"></p><div><b>Size: <span id="dSizeName"></span></b></div><div style="display:flex;gap:8px;margin-top:8px" id="dSizes"></div><button class="add-big" style="margin-top:15px" onclick="addFromDetail()">🛒 ADD TO CART</button><button class="buy-big" onclick="buyNow()">⚡ ORDER NOW - DELIVERY</button></div></div>
-<div class="modal" id="cartModal"><div class="box"><button class="close-btn" onclick="closeCart()">X Close</button><h2>🛒 Your Food Order</h2><div id="cartList"></div><p>Discount Code: <input id="discountCode" placeholder="Enter Spin Code e.g FH20-1234"></p><p>Subtotal: ₦<b id="subTotal">0</b></p><p>Delivery Fee: ₦<b id="deliveryFee">1,000</b></p><div class="grand">TOTAL: ₦<span id="grandTotal">0</span></div><br><input id="cName" placeholder="Full Name *"><input id="cPhone" placeholder="Phone *"><input id="cEmail" placeholder="Email *"><input id="cAddress" placeholder="Delivery Address *"><select id="cLocation" onchange="renderCart()"><option value="PH">Port Harcourt - ₦1,000</option><option value="Lagos">Lagos - ₦2,000</option><option value="Abuja">Abuja - ₦2,000</option><option value="Other">Other - ₦3,000</option></select><select id="cTime"><option>Deliver Now (30-45 mins)</option><option>Deliver in 1 Hour</option><option>Deliver in 2 Hours</option><option>Schedule for Tomorrow</option></select><button class="pay-btn" onclick="payWithPaystack()">💳 PAY ₦<span id="payBtnTotal">0</span> NOW</button><button class="wa-btn" onclick="checkoutWhatsApp()">💬 WhatsApp Order</button></div></div>
+<div class="modal" id="cartModal"><div class="box"><button class="close-btn" onclick="closeCart()">X Close</button><h2>🛒 Your Food Order</h2><div id="cartList"></div><p>Discount Code: <input id="discountCode" placeholder="Enter Spin Code e.g FH-JOLLOF"></p><p>Subtotal: ₦<b id="subTotal">0</b></p><p>Delivery Fee: ₦<b id="deliveryFee">1,000</b></p><div class="grand">TOTAL: ₦<span id="grandTotal">0</span></div><br><input id="cName" placeholder="Full Name *"><input id="cPhone" placeholder="Phone *"><input id="cEmail" placeholder="Email *"><input id="cAddress" placeholder="Delivery Address *"><select id="cLocation" onchange="renderCart()"><option value="PH">Port Harcourt - ₦1,000</option><option value="Lagos">Lagos - ₦2,000</option><option value="Abuja">Abuja - ₦2,000</option><option value="Other">Other - ₦3,000</option></select><select id="cTime"><option>Deliver Now (30-45 mins)</option><option>Deliver in 1 Hour</option><option>Deliver in 2 Hours</option><option>Schedule for Tomorrow</option></select><button class="pay-btn" onclick="payWithPaystack()">💳 PAY ₦<span id="payBtnTotal">0</span> NOW</button><button class="wa-btn" onclick="checkoutWhatsApp()">💬 WhatsApp Order</button></div></div>
 <script>
 var KEY="pk_live_522e90bc4d7ec45abe67ed9b807d7512a0d8ce5b";
 var P=[];
@@ -134,10 +134,58 @@ function buyNow(){addFromDetail();openCart();}
 function updateCart(){var c=0,t=0;cart.forEach(function(x){c+=x.qty;t+=x.price*x.qty});document.getElementById('count').innerText=c;document.getElementById('headCount').innerText=c;document.getElementById('total').innerText=t.toLocaleString();}
 function openCart(){renderCart();document.getElementById('cartModal').style.display='block';}
 function closeCart(){document.getElementById('cartModal').style.display='none';}
-function renderCart(){var h="";if(cart.length==0)h="<p>Cart empty - Add food first</p>";cart.forEach(function(it,i){h+='<div style="display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:8px 0"><div><b>'+it.name+'</b><br><small>'+it.cat+' | Qty '+it.qty+'</small></div><div>₦'+(it.price*it.qty).toLocaleString()+' <button onclick="cart.splice('+i+',1);updateCart();renderCart()">X</button></div></div>';});document.getElementById('cartList').innerHTML=h;var sub=0;cart.forEach(function(x){sub+=x.price*x.qty});var loc=document.getElementById('cLocation').value;var del=loc=="PH"?1000:loc=="Lagos"||loc=="Abuja"?2000:3000;var code=document.getElementById('discountCode').value.toUpperCase();var disc=0;if(code.indexOf("FH50")==0)disc=sub*0.5;else if(code.indexOf("FH20")==0)disc=sub*0.2;else if(code.indexOf("FH10")==0)disc=sub*0.1;else if(code.indexOf("FH05")==0)disc=sub*0.05;else if(code.indexOf("FHFREE")==0)del=0;var grand=sub-disc+del;if(cart.length==0)grand=0;document.getElementById('subTotal').innerText=sub.toLocaleString();document.getElementById('deliveryFee').innerText=del.toLocaleString();document.getElementById('grandTotal').innerText=grand.toLocaleString();document.getElementById('payBtnTotal').innerText=grand.toLocaleString();window.grand=grand;}
-function checkoutWhatsApp(){var msg="Hello Food Hub! My Food Order:\n";cart.forEach(function(it){msg+=it.name+" - ₦"+it.price.toLocaleString()+"\n";});msg+="Code: "+document.getElementById('discountCode').value+"\nTotal: ₦"+window.grand.toLocaleString()+"\nDelivery Time: "+document.getElementById('cTime').value+"\nName: "+document.getElementById('cName').value+"\nPhone: "+document.getElementById('cPhone').value+"\nDelivery Address: "+document.getElementById('cAddress').value;window.open("https://wa.me/2349037002209?text="+encodeURIComponent(msg));}
+function renderCart(){var h="";if(cart.length==0)h="<p>Cart empty - Add food first</p>";cart.forEach(function(it,i){h+='<div style="display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:8px 0"><div><b>'+it.name+'</b><br><small>'+it.cat+' | Qty '+it.qty+'</small></div><div>₦'+(it.price*it.qty).toLocaleString()+' <button onclick="cart.splice('+i+',1);updateCart();renderCart()">X</button></div></div>';});document.getElementById('cartList').innerHTML=h;var sub=0;cart.forEach(function(x){sub+=x.price*x.qty});var loc=document.getElementById('cLocation').value;var del=loc=="PH"?1000:loc=="Lagos"||loc=="Abuja"?2000:3000;var code=document.getElementById('discountCode').value.toUpperCase();var disc=0;if(code.indexOf("FH-JOLLOF")==0)disc=5000;else if(code.indexOf("FH-SUYA")==0)disc=4000;else if(code.indexOf("FH-EGUSI")==0)disc=6000;else if(code.indexOf("FH-AMALA")==0)disc=5500;else if(code.indexOf("FH-ASUN")==0)disc=5500;else if(code.indexOf("FH-PEPPER")==0)disc=5000;else if(code.indexOf("FH20")==0)disc=sub*0.2;else if(code.indexOf("FH50")==0)disc=sub*0.5;if(disc>sub)disc=sub;var grand=sub-disc+del;if(cart.length==0)grand=0;document.getElementById('subTotal').innerText=sub.toLocaleString();document.getElementById('deliveryFee').innerText=del.toLocaleString();document.getElementById('grandTotal').innerText=grand.toLocaleString();document.getElementById('payBtnTotal').innerText=grand.toLocaleString();window.grand=grand;}
+function checkoutWhatsApp(){var msg="Hello Food Hub! My Food Order:\n";cart.forEach(function(it){msg+=it.name+" - ₦"+it.price.toLocaleString()+"\n";});msg+="Spin Code: "+document.getElementById('discountCode').value+"\nTotal: ₦"+window.grand.toLocaleString()+"\nDelivery Time: "+document.getElementById('cTime').value+"\nName: "+document.getElementById('cName').value+"\nPhone: "+document.getElementById('cPhone').value+"\nDelivery Address: "+document.getElementById('cAddress').value;window.open("https://wa.me/2349037002209?text="+encodeURIComponent(msg));}
 function payWithPaystack(){if(cart.length==0)return alert("Cart empty");if(!document.getElementById('cName').value)return alert("Enter Name");if(!document.getElementById('cEmail').value)return alert("Enter Email");if(!document.getElementById('cAddress').value)return alert("Enter Delivery Address");var handler=PaystackPop.setup({key:KEY,email:document.getElementById('cEmail').value,amount:window.grand*100,currency:"NGN",ref:"FOOD"+Math.floor(Math.random()*1000000),callback:function(r){alert("Payment Successful! Ref: "+r.reference+" - Your food is on the way!");cart=[];updateCart();closeCart();},onClose:function(){alert("Payment cancelled");}});handler.openIframe();}
-function spin(){var prizes=["50% OFF - FH50","20% OFF - FH20","10% OFF - FH10","5% OFF - FH05","FREE DELIVERY - FHFREE","TRY AGAIN"];var r=Math.random();var win;if(r<0.1)win=0;else if(r<0.3)win=1;else if(r<0.55)win=2;else if(r<0.7)win=3;else if(r<0.85)win=4;else win=5;var emojis=["🎉","🎊","🎁","✨","🚚","😢"];document.getElementById('spinResult').innerText=emojis[win]+" "+prizes[win];if(win==5){document.getElementById('winCodeBox').style.display='block';document.getElementById('winLabel').innerText="TRY AGAIN";document.getElementById('winCode').innerText="Spin Again";}else{var parts=prizes[win].split(" - ");var code=parts[1]+"-"+Math.floor(1000+Math.random()*9000);window.lastCode=code;document.getElementById('winCodeBox').style.display='block';document.getElementById('winLabel').innerText=parts[0];document.getElementById('winCode').innerText=code;document.getElementById('discountCode').value=code;alert("You Win "+parts[0]+"! Code: "+code);}}
+function spin(){
+if(localStorage.getItem("foodhub_spun")==="1"){
+document.getElementById('spinResult').innerText="❌ You don spin already!";
+document.getElementById('spinBtn').innerText="ALREADY USED - 1 SPIN ONLY";
+document.getElementById('spinBtn').disabled=true;
+document.getElementById('spinBtn').style.background="#555";
+alert("You don already spin once. 1 spin per person only.");
+return;
+}
+var prizes=[
+"FREE Jollof Rice + Chicken - FH-JOLLOF",
+"FREE Suya - FH-SUYA",
+"FREE Egusi + Assorted - FH-EGUSI",
+"FREE Amala + Ewedu + Chicken - FH-AMALA",
+"FREE Asun - FH-ASUN",
+"FREE Goat Meat Peppersoup - FH-PEPPER",
+"20% OFF Any Food - FH20",
+"TRY AGAIN - NO WIN"
+];
+var r=Math.random();
+var win;
+if(r<0.15)win=0;
+else if(r<0.30)win=1;
+else if(r<0.45)win=2;
+else if(r<0.60)win=3;
+else if(r<0.70)win=4;
+else if(r<0.80)win=5;
+else if(r<0.90)win=6;
+else win=7;
+var parts=prizes[win].split(" - ");
+document.getElementById('spinResult').innerText="🎉 "+parts[0];
+document.getElementById('winCodeBox').style.display='block';
+document.getElementById('winLabel').innerText=parts[0];
+document.getElementById('winCode').innerText=parts[1];
+document.getElementById('discountCode').value=parts[1];
+localStorage.setItem("foodhub_spun","1");
+document.getElementById('spinBtn').innerText="ALREADY USED - 1 SPIN ONLY";
+document.getElementById('spinBtn').disabled=true;
+document.getElementById('spinBtn').style.background="#555";
+document.getElementById('spinNote').innerText="You don use your 1 spin. Show this code when you order.";
+if(win==7){alert("Sorry, TRY AGAIN next time. You don use your 1 spin.");}
+else{alert("You Win "+parts[0]+"! Your Code: "+parts[1]+" - Use am to order!");}
+}
+if(localStorage.getItem("foodhub_spun")==="1"){
+document.getElementById('spinBtn').innerText="ALREADY USED - 1 SPIN ONLY";
+document.getElementById('spinBtn').disabled=true;
+document.getElementById('spinBtn').style.background="#555";
+document.getElementById('spinResult').innerText="❌ You don spin already!";
+}
 renderBrands();renderProducts();
 </script>
 </body>
