@@ -47,14 +47,14 @@ input,select{width:100%;padding:13px;margin:6px 0;border:1px solid #ddd;border-r
 </style>
 </head>
 <body>
-<header><div style="display:flex;justify-content:space-between"><div class="logo">FOOD<span>HUB</span> 🍔</div><div>🛒 <b id="headCount">0</b></div></div><div style="font-size:12px;color:#666">📍 Port Harcourt • Fast Delivery 30-45 mins • Open Now</div><div class="search"><input id="search" placeholder="Search ANY Food: Jollof, Shawarma, Pizza..." onkeyup="searchP()"><button onclick="searchP()">Search</button></div></header>
+<header><div style="display:flex;justify-content:space-between"><div class="logo">FOOD<span>HUB</span> 🍔</div><div>🛒 <b id="headCount">0</b></div></div><div style="font-size:12px;color:#666">📍 Port Harcourt • Fast Delivery 30-45 mins • Open Now</div><div class="search"><input id="search" placeholder="Search ANY Food: Jollof, Egusi, Suya..." onkeyup="searchP()"><button onclick="searchP()">Search</button></div></header>
 <div class="spin-banner"><h2 style="margin:0">🎡 SPIN & WIN FREE FOOD!</h2><p style="margin:4px 0;font-size:13px;color:#ccc">Spin, Win Discount, Use am to Order!</p><h1 id="spinResult" style="font-size:28px;margin:8px 0">🎡 SPIN NOW</h1><button onclick="spin()">🎡 SPIN NOW</button><div class="code-box" id="winCodeBox">🎉 YOU WIN <span id="winLabel"></span> | Code: <span id="winCode"></span></div></div>
 <div class="sec">🔥 HOT SELLERS - PEOPLE DEY ORDER NOW</div>
 <div class="products" id="marketGrid"></div>
 <div class="sec">🍽️ ORDER BY CATEGORY - ALL FOODS</div>
 <div class="brand-bar" id="brandBar"></div>
 <div class="banner"><h2 style="margin:0">🍔 ALL FOODS</h2><p id="totalP" style="margin:4px 0"></p><p style="margin:0;font-size:12px;color:#FFD700">🚚 Delivery: PH ₦1,000 | Lagos ₦2,000 | Abuja ₦2,000</p></div>
-<div class="cat"><button onclick="filterCat('all',this)" class="active">All</button><button onclick="filterCat('rice',this)">Rice</button><button onclick="filterCat('swallow',this)">Swallow</button><button onclick="filterCat('fastfood',this)">Fast Food</button><button onclick="filterCat('grill',this)">Grill / BBQ</button><button onclick="filterCat('drinks',this)">Drinks</button><button onclick="filterCat('snacks',this)">Snacks</button><button onclick="filterCat('breakfast',this)">Breakfast</button><button onclick="filterCat('soups',this)">Soups</button><button onclick="filterCat('dessert',this)">Dessert</button></div>
+<div class="cat"><button onclick="filterCat('all',this)" class="active">All</button><button onclick="filterCat('rice',this)">Rice</button><button onclick="filterCat('swallow',this)">Swallow</button><button onclick="filterCat('grill',this)">Grill / BBQ</button><button onclick="filterCat('soups',this)">Soups</button></div>
 <div class="products" id="products"></div>
 <div class="cart-bar"><div>🛒 <b id="count">0</b><br><b>Total: ₦<span id="total">0</span></b></div><div><button onclick="openCart()">View Cart</button> <button class="pay" onclick="openCart()">Checkout</button></div></div>
 <div class="modal" id="detailModal"><div class="box"><button class="close-btn" onclick="closeDetail()">X Close</button><img id="dImg" class="detail-img" src=""><div id="dBrand" style="margin-top:8px"></div><h2 id="dName"></h2><div><span style="color:#e60000;font-size:22px;font-weight:900">₦<span id="dPrice"></span></span> <del id="dOld"></del> <span>⭐ 4.8 • 30-45 mins</span></div><p id="dDesc" style="color:#666;font-size:13px"></p><div><b>Size: <span id="dSizeName"></span></b></div><div style="display:flex;gap:8px;margin-top:8px" id="dSizes"></div><button class="add-big" style="margin-top:15px" onclick="addFromDetail()">🛒 ADD TO CART</button><button class="buy-big" onclick="buyNow()">⚡ ORDER NOW - DELIVERY</button></div></div>
@@ -65,50 +65,60 @@ var P=[];
 function getImg(cat,name){
 if(name=="Jollof Rice + Chicken")return "jollof.jpg";
 if(name=="White Rice + Stew")return "white-rice-stew.jpg";
-if(name=="Ofada Rice + Sauce")return "ofada-ayamase.jpg";
+if(name=="Ofada Rice + Ayamase")return "ofada-ayamase.jpg";
 if(name=="Fried Rice + Chicken")return "fried-rice-chicken.jpg";
-if(name=="Amala + Ewedu + Goat Meat")return "amala-chicken.jpg";
-if(name=="Amala + Ewedu")return "amala.jpg";
-if(name=="Eba + Egusi Soup")return "egusi-pot.jpg";
-if(name=="Pounded Yam + Egusi")return "egusi-chicken.jpg";
-if(name=="Egusi Soup + Meat")return "egusi-assorted.jpg";
-if(name=="Asun - Spicy Goat Meat")return "asun.jpg";
-if(name=="Suya - Beef")return "suya.jpg";
-if(name=="Vegetable Soup")return "efo-riro.jpg";
-if(name=="Oha Soup")return "afang.jpg";
-if(name=="Bitterleaf Soup")return "afang-pounded.jpg";
-if(name=="Okra Soup")return "assorted-soup.jpg";
-if(name=="Pepper Soup - Goat Meat")return "goat-peppersoup.jpg";
-if(name=="Pepper Soup - Catfish")return "goat-meat-soup.jpg";
-if(name=="Ogbono Soup")return "assorted-meat-soup.jpg";
-if(name=="Banga Rice")return "white-rice-dodo.jpg";
-return "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&auto=format&fit=crop&q=80";
+if(name=="White Rice + Dodo")return "white-rice-dodo.jpg";
+if(name=="Amala")return "amala.jpg";
+if(name=="Amala + Ewedu + Chicken")return "amala-chicken.jpg";
+if(name=="Suya")return "suya.jpg";
+if(name=="Asun")return "asun.jpg";
+if(name=="Afang Soup")return "afang.jpg";
+if(name=="Afang + Pounded Yam")return "afang-pounded.jpg";
+if(name=="Efo Riro")return "efo-riro.jpg";
+if(name=="Egusi Soup Pot")return "egusi-pot.jpg";
+if(name=="Egusi + Chicken")return "egusi-chicken.jpg";
+if(name=="Egusi + Assorted")return "egusi-assorted.jpg";
+if(name=="Assorted Soup")return "assorted-soup.jpg";
+if(name=="Assorted Meat Soup")return "assorted-meat-soup.jpg";
+if(name=="Goat Meat Soup")return "goat-meat-soup.jpg";
+if(name=="Goat Meat Peppersoup")return "goat-peppersoup.jpg";
+return "jollof.jpg";
 }
 var FOOD_DATA=[
-["rice",3500,["Jollof Rice + Chicken","Fried Rice + Chicken","White Rice + Stew","Banga Rice","Coconut Rice","Ofada Rice + Sauce","Chinese Fried Rice","Ghana Jollof Rice"]],
-["swallow",4000,["Amala + Ewedu + Goat Meat","Eba + Egusi Soup","Pounded Yam + Egusi","Fufu + Ogbono","Semo + Vegetable Soup","Wheat + Okra Soup","Eba + Oha Soup","Pounded Yam + Ogbono"]],
-["fastfood",5000,["Shawarma + Drink","Burger + Fries","Pizza - Chicken","Pizza - Beef","Fried Chicken + Fries","Sandwich","Hot Dog","Meat Pie + Drink"]],
-["grill",6000,["Grilled Chicken","Grilled Fish - Catfish","Asun - Spicy Goat Meat","Peppered Chicken","Suya - Beef","Grilled Turkey","BBQ Chicken Wings","Peppered Gizzard"]],
-["drinks",1500,["Coke","Pepsi","Malt","Chapman","Zobo Drink","Smoothie - Mango","Smoothie - Banana","Orange Juice","Iced Tea","Mineral Water"]],
-["snacks",2000,["Meat Pie","Doughnut","Puff Puff","Egg Roll","Chicken Pie","Sausage Roll","Small Chops","Buns"]],
-["breakfast",3000,["Akara + Pap","Bread + Egg + Tea","Yam + Egg Sauce","Plantain + Egg","Oat + Milk","Pancakes + Honey","Beans + Plantain"]],
-["soups",4000,["Egusi Soup + Meat","Ogbono Soup","Vegetable Soup","Oha Soup","Bitterleaf Soup","Okra Soup","Pepper Soup - Goat Meat","Pepper Soup - Catfish"]],
-["dessert",2500,["Ice Cream","Cake Slice","Pudding","Fruit Salad","Parfait","Chocolate Cake"]],
+["rice",5000,["Jollof Rice + Chicken"]],
+["rice",4500,["White Rice + Stew"]],
+["rice",6000,["Ofada Rice + Ayamase"]],
+["rice",5500,["Fried Rice + Chicken"]],
+["rice",5000,["White Rice + Dodo"]],
+["swallow",5000,["Amala"]],
+["swallow",5500,["Amala + Ewedu + Chicken"]],
+["grill",4000,["Suya"]],
+["grill",5500,["Asun"]],
+["soups",5000,["Afang Soup"]],
+["soups",6500,["Afang + Pounded Yam"]],
+["soups",5000,["Efo Riro"]],
+["soups",6000,["Egusi Soup Pot"]],
+["soups",5500,["Egusi + Chicken"]],
+["soups",6000,["Egusi + Assorted"]],
+["soups",5500,["Assorted Soup"]],
+["soups",6000,["Assorted Meat Soup"]],
+["soups",5500,["Goat Meat Soup"]],
+["soups",5000,["Goat Meat Peppersoup"]],
 ];
 FOOD_DATA.forEach(function(b){b[2].forEach(function(name){P.push({cat:b[0],name:name,price:b[1],img:getImg(b[0],name)});});});
 var cart=[],curBrand="all",curCat="all",searchQ="";
 var MARKET=[
-{cat:"rice",name:"Jollof Rice + Chicken",price:3500,img:getImg("rice","Jollof Rice + Chicken")},
-{cat:"fastfood",name:"Shawarma + Drink",price:5000,img:getImg("fastfood","Shawarma + Drink")},
-{cat:"grill",name:"Grilled Catfish",price:6000,img:getImg("grill","Grilled Catfish")},
-{cat:"fastfood",name:"Burger + Fries",price:5000,img:getImg("fastfood","Burger + Fries")},
-{cat:"swallow",name:"Amala + Ewedu",price:4000,img:getImg("swallow","Amala + Ewedu")},
-{cat:"fastfood",name:"Pizza - Chicken",price:5000,img:getImg("fastfood","Pizza - Chicken")}
+{cat:"rice",name:"Jollof Rice + Chicken",price:5000,img:getImg("rice","Jollof Rice + Chicken")},
+{cat:"soups",name:"Egusi + Assorted",price:6000,img:getImg("soups","Egusi + Assorted")},
+{cat:"grill",name:"Suya",price:4000,img:getImg("grill","Suya")},
+{cat:"soups",name:"Goat Meat Peppersoup",price:5000,img:getImg("soups","Goat Meat Peppersoup")},
+{cat:"swallow",name:"Amala + Ewedu + Chicken",price:5500,img:getImg("swallow","Amala + Ewedu + Chicken")},
+{cat:"rice",name:"Fried Rice + Chicken",price:5500,img:getImg("rice","Fried Rice + Chicken")}
 ];
 var mg="";MARKET.forEach(function(m,i){mg+='<div class="card"><img src="'+m.img+'" loading="lazy"><div class="card-body"><span class="brand-tag">'+m.cat.toUpperCase()+'</span><h3>'+m.name+'</h3><div class="price">₦'+m.price.toLocaleString()+' <del>₦'+(m.price+1000).toLocaleString()+'</del></div><button class="add" onclick="buyMarket('+i+')">🛒 ORDER NOW</button></div></div>';});
 document.getElementById('marketGrid').innerHTML=mg;
 function buyMarket(i){var m=MARKET[i];var msg="Hello Food Hub! I want to order: "+m.name+" - ₦"+m.price.toLocaleString()+" | My Address: ";window.open("https://wa.me/2349037002209?text="+encodeURIComponent(msg));}
-function renderBrands(){var cats={};P.forEach(function(p){cats[p.cat]=(cats[p.cat]||0)+1});var h='<div class="brand '+(curBrand=="all"?"active":"")+'" onclick="setBrand(\'all\')"><b>ALL</b><br><small>'+P.length+' foods</small></div>';Object.keys(cats).forEach(function(b){var em=b=="rice"?"🍚":b=="swallow"?"🍲":b=="fastfood"?"🍔":b=="grill"?"🔥":b=="drinks"?"🥤":b=="snacks"?"🥐":b=="breakfast"?"🍳":b=="soups"?"🍜":"🍰";h+='<div class="brand '+(curBrand==b?"active":"")+'" onclick="setBrand(\''+b+'\')"><b>'+em+' '+b.toUpperCase()+'</b><br><small>'+cats[b]+' foods</small></div>';});document.getElementById('brandBar').innerHTML=h;}
+function renderBrands(){var cats={};P.forEach(function(p){cats[p.cat]=(cats[p.cat]||0)+1});var h='<div class="brand '+(curBrand=="all"?"active":"")+'" onclick="setBrand(\'all\')"><b>ALL</b><br><small>'+P.length+' foods</small></div>';Object.keys(cats).forEach(function(b){var em=b=="rice"?"🍚":b=="swallow"?"🍲":b=="grill"?"🔥":"🍜";h+='<div class="brand '+(curBrand==b?"active":"")+'" onclick="setBrand(\''+b+'\')"><b>'+em+' '+b.toUpperCase()+'</b><br><small>'+cats[b]+' foods</small></div>';});document.getElementById('brandBar').innerHTML=h;}
 function setBrand(b){curBrand=b;renderBrands();renderProducts();}
 function filterCat(c,el){curCat=c;document.querySelectorAll('.cat button').forEach(function(x){x.classList.remove('active')});el.classList.add('active');renderProducts();}
 function searchP(){searchQ=document.getElementById('search').value.toLowerCase();renderProducts();}
